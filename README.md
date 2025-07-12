@@ -23,6 +23,14 @@ rewear/rewear-frontend/   # React + Tailwind frontend
 
 rewear/rewear-backend/   # Express + MongoDB backend
 
-
-
 ---
+
+## 🚀 Getting Started
+
+### 1️⃣ Backend Setup
+
+```bash
+cd rewear-backend
+npm install
+
+### 2️⃣ Frontend Setup
