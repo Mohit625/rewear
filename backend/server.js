@@ -3,30 +3,20 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
+dotenv.config();
+const app = express();
+
 import authRoutes from './routes/authRoutes.js';
 import itemRoutes from './routes/itemRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 
-dotenv.config();
-const app = express();
-
-// ✅ STEP 1: Apply CORS FIRST
-app.use(cors({
-  origin: 'http://localhost:5173',
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}));
-
-// ✅ STEP 2: JSON body parser
+app.use(cors());
 app.use(express.json());
 
-// ✅ STEP 3: Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/items', itemRoutes);
 app.use('/api/admin', adminRoutes);
 
-// ✅ STEP 4: Connect MongoDB and Start Server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(5000, () => {
