@@ -32,5 +32,11 @@ rewear/rewear-backend/   # Express + MongoDB backend
 ```bash
 cd rewear-backend
 npm install
+```
 
 ### 2️⃣ Frontend Setup
+
+```bash
+cd rewear-frontend
+npm install
+```
