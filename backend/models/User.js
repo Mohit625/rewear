@@ -5,7 +5,15 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
   points: { type: Number, default: 0 },
-  role: { type: String, default: 'user' }
-});
+  wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
+  role: { type: String, default: 'user' },
+  notifications: [
+    {
+      message: String,
+      date: { type: Date, default: Date.now },
+      read: { type: Boolean, default: false }
+    }
+  ]
+},{ timestamps: true });
 
 export default mongoose.model('User', userSchema);

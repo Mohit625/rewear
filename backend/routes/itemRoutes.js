@@ -19,32 +19,4 @@ router.get('/:id', async (req, res) => {
   res.json(item);
 });
 
-router.patch('/:id/swap', protect, async (req, res) => {
-    const item = await Item.findById(req.params.id);
-    if (!item || !item.available) return res.status(400).json({ error: 'Item unavailable' });
-  
-    item.available = false;
-    await item.save();
-  
-    // Optionally: track swap history per user
-  
-    res.json({ message: 'Swap request accepted', item });
-  });
-  
-  // PATCH /api/items/:id/redeem
-  router.patch('/:id/redeem', protect, async (req, res) => {
-    const item = await Item.findById(req.params.id);
-    if (!item || !item.available) return res.status(400).json({ error: 'Item unavailable' });
-  
-    const user = await User.findById(req.user.id);
-    if (user.points < item.points) return res.status(400).json({ error: 'Insufficient points' });
-  
-    user.points -= item.points;
-    item.available = false;
-  
-    await Promise.all([user.save(), item.save()]);
-  
-    res.json({ message: 'Redeemed with points', item });
-  });
-
 export default router;

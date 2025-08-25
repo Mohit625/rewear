@@ -1,18 +1,18 @@
 import mongoose from 'mongoose';
 
 const itemSchema = new mongoose.Schema({
-  title: String,
+  title: { type: String, required: true },
+category: { type: String, required: true },
   description: String,
-  category: String,
   type: String,
   size: String,
   condition: String,
   tags: [String],
   imageUrls: [String],
-  points: Number,
+  points: { type: Number, default: 1 },
   approved: { type: Boolean, default: false },
   available: { type: Boolean, default: true },
-  uploader: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  uploader: { type: mongoose.Schema.Types.ObjectId, ref: 'User' , required: true  }
 }, { timestamps: true });
 
 export default mongoose.model('Item', itemSchema);
